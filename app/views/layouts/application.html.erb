@@ -1,0 +1,21 @@
+<!-- by alex january 2015 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>mood</title>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+</head>
+<body class="<%= yield(:class) %>">
+    <% flash.each do |message_type, message| %>
+        <div class="flash flash-<%= message_type %>"><%= message %></div>
+    <% end %>
+
+    <h1><img src="http://s.goose.im/emoji/emoji_u1f30a.png" alt="surf"></h1>
+
+    <%= yield %>
+
+</body>
+</html>

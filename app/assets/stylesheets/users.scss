@@ -1,0 +1,76 @@
+@import 'pages';
+
+$highlight:#74B43C;
+
+.form {
+
+    section.user {
+        width:22em;
+        margin:5em auto 0 auto;
+    }
+
+    input {
+        background:#f9f9f9;
+        display:block;
+        position:relative;
+        border-left-width:8em;
+        width:22em;
+    }
+
+    input:focus {
+        outline:none;
+        border-left:$highlight 3em solid;
+        background:#fff;
+        transition:100ms ease-in all;
+    }
+
+    input + label {
+        position:relative;
+        top:-2.9em;
+        left:2.2em;
+        text-transform:uppercase;
+        font-size:11px;
+        color:#eee;
+        text-align:right;
+        
+        &.error {color:#a4393e;}
+    }
+
+    input:focus + label {
+        left:-200em;
+    }
+
+    input[type=submit] {
+        border-left:0;
+        width:14em;
+        color:#999;
+        margin-left:8em;
+        font-family:'Montserrat',sans-serif;
+        text-transform:uppercase;
+        line-height:1.1em;
+        cursor:pointer;
+        border:2px solid #f9f9f9;
+    }
+
+    input[type=submit]:hover {
+        color:$highlight;
+    }
+
+    input[type=submit]:focus {
+        color:$highlight;
+        border-color:$highlight;
+    }
+
+    .form_error {
+        font-size:0.9em;
+        background:#a4393e;
+        padding:1em;
+        width:22em;
+        margin-bottom:1em;
+        
+        span {
+            display:block;
+        }
+    }
+
+}

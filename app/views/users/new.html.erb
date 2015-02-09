@@ -1,0 +1,25 @@
+<% provide(:class, "form") %>
+ 
+<section class="user">
+ 
+    <h2>create account</h2>
+    
+    <%= render 'shared/error_messages' %>
+    
+    <%= form_for(@user) do |f| %>
+      <%= f.text_field :username %>
+      <%= f.label :username %>
+
+      <%= f.email_field :email %>
+      <%= f.label :email %>
+
+      <%= f.password_field :password %>
+      <%= f.label :password %>
+
+      <%= f.password_field :password_confirmation %>
+      <%= f.label :password_confirmation, "confirm" %>
+
+      <%= f.submit "Create my account" %>
+    <% end %>
+
+</section>
