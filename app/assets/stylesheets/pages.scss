@@ -26,6 +26,7 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 $bg:#222;
+$blue:#4BBFC3;
 
 * {box-sizing:border-box;}
 
@@ -40,11 +41,39 @@ body {
     overflow-x:hidden;
 }
 
-h1 {
-    text-align:center;
-    margin-top:0;
-    img {
-        height:1em;
+header {    
+    h1 {
+        width:1em;
+        margin-top:0;
+        float:left;
+        
+        img {
+            height:1em;
+        }
+    }
+    nav {               
+        a {
+            text-transform:uppercase;
+            color:#555;
+            font-weight:bold;
+            font-size:1.2em;
+            float:right;
+            padding-top:0.6em;
+            margin-left:3em;
+            text-decoration:none;
+            transition:all 100ms ease-in;
+            
+            &:hover {
+                color:$blue;
+            }
+        }
+    }
+    
+    &:after {
+        content:'';
+        clear:both;
+        float:none;
+        display:block;
     }
 }
 
@@ -54,6 +83,10 @@ h2 {
     font-weight:bold;
     font-size:1.2em;
     margin:1.2em 0;
+}
+
+a {
+    color:$blue;
 }
 
 input {

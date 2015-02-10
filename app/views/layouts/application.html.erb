@@ -9,11 +9,22 @@
     <%= csrf_meta_tags %>
 </head>
 <body class="<%= yield(:class) %>">
+    <header>
+        <h1><%= link_to image_tag("http://s.goose.im/emoji/emoji_u1f30a.png"), root_path %></h1>
+        <nav>
+            <% if logged_in? %>
+                <%= link_to "Log out", logout_path, method: "delete" %>
+                <%= link_to "History", current_user %>
+                <a>Hi, <%= current_user.username %></a>
+            <% else %>
+                <%= link_to "Log in", login_path %>
+            <% end %>
+        </nav>
+    </header>
+
     <% flash.each do |message_type, message| %>
         <div class="flash flash-<%= message_type %>"><%= message %></div>
     <% end %>
-
-    <h1><img src="http://s.goose.im/emoji/emoji_u1f30a.png" alt="surf"></h1>
 
     <%= yield %>
 

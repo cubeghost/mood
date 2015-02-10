@@ -1,12 +1,22 @@
 @import 'pages';
 
-$highlight:#74B43C;
+//$highlight:#74B43C;
+$highlight:$blue;
 
 .form {
 
     section.user {
-        width:22em;
+        width:20em;
         margin:5em auto 0 auto;
+        
+        p {
+            font-size:0.9em;
+            color:#999;
+        }
+    }
+    
+    form {
+        margin-bottom:2em;
     }
 
     input {
