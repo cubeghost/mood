@@ -45,13 +45,17 @@
     </section>
     <p class="info"></p>
 
-    <a href="#" class="submit button">Save</a>
-
-    <input type="text" class="note" placeholder="any notes?"> 
-
+    <% if logged_in? %>
+        <a href="#" class="submit button">Save</a>
+        <input type="text" class="note" placeholder="any notes?"> 
+    <% end %>
 
     <article class="history">
-        <%= render @entries %>
+        <% if logged_in? %>
+            <%= render @entries %>
+        <% else %>
+            <%= link_to "Log in", login_path %> or <%= link_to "sign up", signup_path %> to save entries.
+        <% end %>
     </article>
 
     <div class="alert" role="alert">
