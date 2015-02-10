@@ -1,1 +1,5 @@
-<%= @user.username %>, <%= @user.email %>
+<section>
+    <%= render @entries %>
+    <br>
+    <%= will_paginate @entries %>
+</section>

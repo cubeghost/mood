@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+user = User.find(1)
+content = '{"feels":{"mood":"4","energy":"3","pain":"5","fog":"6"},"notes":"imitrex","time":1422038001715}'
+user.entries.create!(content: content)

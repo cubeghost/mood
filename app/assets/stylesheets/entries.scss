@@ -1,0 +1,40 @@
+@import 'pages';
+
+.info {
+    margin-top:-1em;
+    float:left;
+    margin-bottom:7em;
+    span {
+        text-transform:uppercase;
+        color:#555;
+        font-weight:bold;
+        &.color {
+            width:2em;
+            height:0.8em;
+            display:inline-block;
+            margin-right:2em;
+        }
+    }
+}
+
+
+article {
+    clear:both;
+    float:none;
+    position:relative;
+    padding:4px;
+    @extend .info;
+    @extend .title-before;
+    span {
+        display:block;
+        color:#aaa;
+        img {
+                height:1.1em;
+                margin:0 0.3em 0 0.5em;
+                vertical-align:-2px;
+        }
+        &.entry {margin-bottom:1em;}
+        &.date {margin-bottom:4px;color:#555;display:inline;float:right;}
+        &.notes {color:#555;display:inline;text-transform:none;}
+    }
+}
