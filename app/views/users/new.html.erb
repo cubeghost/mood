@@ -4,9 +4,9 @@
  
     <h2>create account</h2>
     
-    <%= render 'shared/error_messages' %>
-    
     <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
       <%= f.text_field :username %>
       <%= f.label :username %>
 

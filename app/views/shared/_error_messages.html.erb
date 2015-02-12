@@ -1,6 +1,6 @@
-<% if @user.errors.any? %>
+<% if object.errors.any? %>
   <div class="form_error">
-    <% @user.errors.full_messages.each do |msg| %>
+    <% object.errors.full_messages.each do |msg| %>
       <span><%= msg %></span>
     <% end %>
   </div>

@@ -46,8 +46,12 @@
     <p class="info"></p>
 
     <% if logged_in? %>
-        <a href="#" class="submit button">Save</a>
-        <input type="text" class="note" placeholder="any notes?"> 
+        <%= form_for(@entry) do |f| %>
+            <a href="#" class="submit button">Save</a>
+            <input type="text" class="note" placeholder="any notes?">
+            <%= f.hidden_field :content %>
+            <%= render 'shared/error_messages', object: f.object %>
+        <% end %>
     <% end %>
 
     <article class="history">
