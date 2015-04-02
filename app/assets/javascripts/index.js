@@ -26,23 +26,27 @@ $(function(){
   
   //console.log(JSON.stringify(color));
   
-  var color =  {'pain':{'1':'rgb(86, 28, 67)','2':'rgb(96, 32, 66)','3':'rgb(106, 35, 66)','4':'rgb(115, 39, 65)','5':'rgb(125, 43, 64)','6':'rgb(135, 46, 64)','7':'rgb(145, 50, 63)','8':'rgb(154, 54, 62)','9':'rgb(164, 57, 62)','10':'rgb(174, 61, 61)'},'mood':{'1':'rgb(198, 89, 127)','2':'rgb(177, 106, 138)','3':'rgb(157, 122, 149)','4':'rgb(136, 140, 161)','5':'rgb(116, 157, 172)','6':'rgb(95, 173, 183)'},'energy':{'1':'rgb(232, 181, 78)','2':'rgb(209, 182, 80)','3':'rgb(186, 183, 82)','4':'rgb(163, 184, 84)','5':'rgb(140, 186, 87)','6':'rgb(117, 187, 89)','7':'rgb(94, 188, 91)','8':'rgb(71, 189, 93)'},'fog':{'1':'rgb(164, 193, 203)','2':'rgb(171, 196, 204)','3':'rgb(179, 199, 204)','4':'rgb(186, 201, 204)','5':'rgb(194, 204, 204)','6':'rgb(201, 207, 204)','7':'rgb(209, 209, 204)','8':'rgb(216, 212, 204)'}};
+    var color =  {'pain':{'1':'rgb(86, 28, 67)','2':'rgb(96, 32, 66)','3':'rgb(106, 35, 66)','4':'rgb(115, 39, 65)','5':'rgb(125, 43, 64)','6':'rgb(135, 46, 64)','7':'rgb(145, 50, 63)','8':'rgb(154, 54, 62)','9':'rgb(164, 57, 62)','10':'rgb(174, 61, 61)'},'mood':{'1':'rgb(198, 89, 127)','2':'rgb(177, 106, 138)','3':'rgb(157, 122, 149)','4':'rgb(136, 140, 161)','5':'rgb(116, 157, 172)','6':'rgb(95, 173, 183)'},'energy':{'1':'rgb(232, 181, 78)','2':'rgb(209, 182, 80)','3':'rgb(186, 183, 82)','4':'rgb(163, 184, 84)','5':'rgb(140, 186, 87)','6':'rgb(117, 187, 89)','7':'rgb(94, 188, 91)','8':'rgb(71, 189, 93)'},'fog':{'1':'rgb(164, 193, 203)','2':'rgb(171, 196, 204)','3':'rgb(179, 199, 204)','4':'rgb(186, 201, 204)','5':'rgb(194, 204, 204)','6':'rgb(201, 207, 204)','7':'rgb(209, 209, 204)','8':'rgb(216, 212, 204)'}};
   
-  var emoji = {
-    1:'http://s.goose.im/emoji/emoji_u1f622.png',
-    2:'http://s.goose.im/emoji/emoji_u1f614.png',
-    3:'http://s.goose.im/emoji/emoji_u1f61b.png',
-    4:'http://s.goose.im/emoji/emoji_u1f610.png',
-    5:'http://s.goose.im/emoji/emoji_u1f603.png',
-    6:'http://s.goose.im/emoji/emoji_u1f60a.png'
-  };
+    var emoji = {
+        1:'http://s.goose.im/emoji/emoji_u1f622.png',
+        2:'http://s.goose.im/emoji/emoji_u1f614.png',
+        3:'http://s.goose.im/emoji/emoji_u1f61b.png',
+        4:'http://s.goose.im/emoji/emoji_u1f610.png',
+        5:'http://s.goose.im/emoji/emoji_u1f603.png',
+        6:'http://s.goose.im/emoji/emoji_u1f60a.png'
+    };
   
+    // visjs
+    var chart_data = [];
   
     $('span.entry').each(function(){
 
          var span = $(this).text();
-
+         
          var local = $.parseJSON(span);
+
+         //console.log(span);
 
          var time = local['time'];
          var date = new Date(time);
@@ -61,7 +65,72 @@ $(function(){
 
          $(this).html(process);
 
+        // visjs
+        Array.prototype.push.apply(chart_data, [{x:time,    y:energy,    group:'energy'}]);
+        Array.prototype.push.apply(chart_data, [{x:time,    y:fog,       group:'fog'}]);
+        Array.prototype.push.apply(chart_data, [{x:time,    y:mood,      group:'mood'}]);
+        Array.prototype.push.apply(chart_data, [{x:time,    y:pain,      group:'pain'}]);
+
+        console.log(chart_data);
+
     }); 
+    
+    //visjs
+    
+    var container = document.getElementById('chart');
+
+    var chart_groups = new vis.DataSet();
+    chart_groups.add({id:'energy',content:'Energy',className:'energy'});
+    chart_groups.add({id:'fog',content:'Fog',className:'fog'});
+    chart_groups.add({id:'mood',content:'Mood',className:'mood'});
+    chart_groups.add({id:'pain',content:'Pain',className:'pain'});
+    
+    var today = new Date();
+    
+    var options = {
+        dataAxis: {
+            customRange: {
+                left: {
+                    min:1, max:10
+                }
+            },
+            showMinorLabels: false
+        },
+        showCurrentTime: false,
+        width: '100%',
+        height:'300px',
+        drawPoints: {
+            style: 'circle',
+            size: '10'
+        },
+        timeAxis: {
+            scale: 'day'
+        },
+        zoomMax: 315360000000,
+        start: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
+    };
+    
+    var graph2d = new vis.Graph2d(container, chart_data, chart_groups, options);
+    
+    $('circle.point').qtip({
+        content: {
+            text: function(event,api){
+                var value = 10-($(this).attr('cy')/45);
+                var label = $(this).attr('class').split(' ')[0];
+                return label + ': ' + value;
+            }
+        },
+        position: {
+            my: 'bottom center',
+            at: 'top center'
+        },
+        style: {
+            classes: 'qtip-tipsy'
+        }
+    });
+    
+  // end visjs
+  
   
   
   $('section a').click(function(){
