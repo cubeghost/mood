@@ -48,6 +48,16 @@ article {
     border-color:transparent!important;
 }
 
+.vis.timeline .dataaxis .yAxis.major,
+.vis.timeline .dataaxis .yAxis.minor,
+.vis.timeline .timeaxis .text {
+    color:#888!important;
+}
+
+.vis.timeline .timeaxis .text.major {
+    opacity:0.5;
+}
+
 #chart {
     margin-bottom:3em;
 }

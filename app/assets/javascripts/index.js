@@ -71,7 +71,7 @@ $(function(){
         Array.prototype.push.apply(chart_data, [{x:time,    y:mood,      group:'mood'}]);
         Array.prototype.push.apply(chart_data, [{x:time,    y:pain,      group:'pain'}]);
 
-        console.log(chart_data);
+        //console.log(chart_data);
 
     }); 
     
@@ -94,11 +94,11 @@ $(function(){
                     min:1, max:10
                 }
             },
-            showMinorLabels: false
+            //showMinorLabels: false
         },
         showCurrentTime: false,
         width: '100%',
-        height:'300px',
+        height:'400px',
         drawPoints: {
             style: 'circle',
             size: '10'
@@ -106,7 +106,8 @@ $(function(){
         timeAxis: {
             scale: 'day'
         },
-        zoomMax: 315360000000,
+        zoomMax: 31536000000,
+        zoomMin: 86400000,
         start: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
     };
     
@@ -115,7 +116,7 @@ $(function(){
     $('circle.point').qtip({
         content: {
             text: function(event,api){
-                var value = 10-($(this).attr('cy')/45);
+                var value = Math.floor(10-($(this).attr('cy')/39));
                 var label = $(this).attr('class').split(' ')[0];
                 return label + ': ' + value;
             }
