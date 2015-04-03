@@ -78,58 +78,64 @@ $(function(){
     //visjs
     
     var container = document.getElementById('chart');
+    
+    if (container) {
+    
+        var chart_groups = new vis.DataSet();
+        chart_groups.add({id:'energy',content:'Energy',className:'energy'});
+        chart_groups.add({id:'fog',content:'Fog',className:'fog'});
+        chart_groups.add({id:'mood',content:'Mood',className:'mood'});
+        chart_groups.add({id:'pain',content:'Pain',className:'pain'});
 
-    var chart_groups = new vis.DataSet();
-    chart_groups.add({id:'energy',content:'Energy',className:'energy'});
-    chart_groups.add({id:'fog',content:'Fog',className:'fog'});
-    chart_groups.add({id:'mood',content:'Mood',className:'mood'});
-    chart_groups.add({id:'pain',content:'Pain',className:'pain'});
-    
-    var today = new Date();
-    
-    var options = {
-        dataAxis: {
-            customRange: {
-                left: {
-                    min:1, max:10
+        var today = new Date();
+
+        var options = {
+            dataAxis: {
+                customRange: {
+                    left: {
+                        min:1, max:10
+                    }
+                },
+                //showMinorLabels: false
+            },
+            showCurrentTime: false,
+            width: '100%',
+            height:'400px',
+            drawPoints: {
+                style: 'circle',
+                size: '10'
+            },
+            timeAxis: {
+                scale: 'day'
+            },
+            zoomMax: 31536000000,
+            zoomMin: 86400000,
+            catmullRom: {
+                enabled: false
+            },
+            start: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
+        };
+
+        var graph2d = new vis.Graph2d(container, chart_data, chart_groups, options);
+
+        $('circle.point').qtip({
+            content: {
+                text: function(event,api){
+                    var value = Math.floor(10-($(this).attr('cy')/39));
+                    var label = $(this).attr('class').split(' ')[0];
+                    return label + ': ' + value;
                 }
             },
-            //showMinorLabels: false
-        },
-        showCurrentTime: false,
-        width: '100%',
-        height:'400px',
-        drawPoints: {
-            style: 'circle',
-            size: '10'
-        },
-        timeAxis: {
-            scale: 'day'
-        },
-        zoomMax: 31536000000,
-        zoomMin: 86400000,
-        start: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
-    };
-    
-    var graph2d = new vis.Graph2d(container, chart_data, chart_groups, options);
-    
-    $('circle.point').qtip({
-        content: {
-            text: function(event,api){
-                var value = Math.floor(10-($(this).attr('cy')/39));
-                var label = $(this).attr('class').split(' ')[0];
-                return label + ': ' + value;
+            position: {
+                my: 'bottom center',
+                at: 'top center'
+            },
+            style: {
+                classes: 'qtip-tipsy'
             }
-        },
-        position: {
-            my: 'bottom center',
-            at: 'top center'
-        },
-        style: {
-            classes: 'qtip-tipsy'
-        }
-    });
+        });
     
+    }
   // end visjs
   
   

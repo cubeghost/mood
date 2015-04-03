@@ -12,5 +12,5 @@ User.create!(username:  "alex",
              password_confirmation: "foobar22")
 
 user = User.find(1)
-content = '{"feels":{"mood":"4","energy":"3","pain":"5","fog":"6"},"notes":"imitrex","time":1422038001715}'
+content = '{"feels":{"mood":"5","energy":"3","pain":"4","fog":"6"},"notes":"","time":1428186709192}'
 user.entries.create!(content: content)
