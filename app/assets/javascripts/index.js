@@ -112,8 +112,8 @@ $(function(){
             zoomMin: 86400000,
             catmullRom: {
                 enabled: false
-            },
-            start: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
+            }//,
+            //start: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
         };
 
         var graph2d = new vis.Graph2d(container, chart_data, chart_groups, options);
